@@ -17,11 +17,11 @@ colorlinks: yes
 lot: false
 lof: false
 always_allow_html: yes
-url: 'https\://code.nimahejazi.org/causal_mediation_workshops/'
-github-repo: nhejazi/causal_mediation_workshops
+url: 'https\://code.nimahejazi.org/ser2022_mediation_workshop/'
+github-repo: nhejazi/ser2022_mediation_workshop
 graphics: yes
-description: "Open source, reproducible teaching materials accompanying half
-  or full-day workshops on modern methods for causal mediation analysis."
+description: "Open source, reproducible teaching materials accompanying a
+  half-day workshops on modern methods for causal mediation analysis."
 ---
 
 # Welcome! {-}
@@ -30,7 +30,7 @@ This open source, reproducible vignette accompanies a half-day workshop on
 modern methods for _causal mediation analysis_. While we encourage use of this
 `bookdown` site, for convenience, we have also made these workshop materials
 [available in
-PDF](https://code.nimahejazi.org/causal_mediation_workshops/causal_mediation.pdf).
+PDF](https://code.nimahejazi.org/ser2022_mediation_workshop/causal_mediation.pdf).
 
 ## About this workshop {#about}
 
@@ -131,9 +131,9 @@ to efforts to optimally target available policy and program resources.
 
 These workshop materials were written using [bookdown](http://bookdown.org/),
 and the complete source is available on
-[GitHub](https://github.com/tlverse/tlverse-handbook).  This version of the book
-was built with `r R.version.string`, [pandoc](https://pandoc.org/) version `r
-rmarkdown::pandoc_version()`, and the following packages:
+[GitHub](https://github.com/nhejazi/ser2022_mediation_workshop). This version of
+the book was built with `r R.version.string`, [pandoc](https://pandoc.org/)
+version `r rmarkdown::pandoc_version()`, and the following packages:
 
 ```{r pkg-list, echo = FALSE, results="asis"}
 # borrowed from https://github.com/tidymodels/TMwR/blob/master/index.Rmd
@@ -253,7 +253,7 @@ versions). A few important notes to keep in mind:
 * Upon an initial attempt, `renv` will prompt you to install packages listed in
   the `renv.lock` file, by printing a message like the following:
 ```{r, eval=FALSE}
-# * Project 'PATH/TO/causal_mediation_workshops' loaded. [renv 0.13.2]
+# * Project 'PATH/TO/causal_mediation_workshops' loaded. [renv 0.15.4]
 # * The project may be out of sync -- use `renv::status()` for more details.
 > renv::status()
 # The following package(s) are recorded in the lockfile, but not installed:
