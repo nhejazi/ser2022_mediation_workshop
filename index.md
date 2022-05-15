@@ -1,7 +1,7 @@
 ---
 knit: "bookdown::render_book"
 title: "Modern Causal Mediation Analysis"
-subtitle: "[Workshop Template]"
+subtitle: "An SER 2022 Workshop"
 author: "[Iván Díaz](https://www.idiaz.xyz/),
   [Nima Hejazi](https://nimahejazi.org),
   [Kara Rudolph](https://kararudolph.github.io/)"
