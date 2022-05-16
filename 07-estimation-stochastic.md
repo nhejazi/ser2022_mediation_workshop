@@ -94,7 +94,7 @@ which, we recall, are defined as follows
   results in cross-validated (or "cross-fitted") one-step and TML estimators
   [@klaassen1987consistent; @zheng2011cross; @chernozhukov2018double], which
   exhibit greater robustness than their non-sample-splitting analogs.
-* To this end, `medoutcon` integrates with the `sl3` `R` package [@coyle2022sl3],
+* To this end, `medoutcon` integrates with the `sl3` `R` package [coyle2022sl3],
   which is extensively documented in this [book
   chapter](https://tlverse.org/tlverse-handbook/sl3) [@phillips2022super;
   @vdl2022targeted].
