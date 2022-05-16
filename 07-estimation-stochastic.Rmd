@@ -478,7 +478,7 @@ linear_contrast <- function(params, eifs, ci_level = 0.95) {
 EY <- mean(weight_behavior$bmi)
 eif_EY <- weight_behavior$bmi - EY
 params_de <- list(stoch_decomp_onestep$theta, EY)
-eifs_de <- list(stoch_decomp_onestep$theta, eif_EY)
+eifs_de <- list(stoch_decomp_onestep$eif, eif_EY)
 
 # direct effect = EY - estimated quantity
 de_est <- linear_contrast(params_de, eifs_de)

@@ -171,7 +171,7 @@ Y_{A_\delta} & = f_Y(W, A_\delta, M_{A_\delta}, U_Y)
 - No confounder of $M\rightarrow Y$ affected by $A$
 - Positivity assumptions:
   + If $g_\delta(a \mid w)>0$ then $g(a \mid w)>0$
-  + If $\P(Z=z\mid W=w)>0$ then $\P(Z=z\mid A=a,W=w)>0$
+  + If $\P(M=m\mid W=w)>0$ then $\P(M=m\mid A=a,W=w)>0$
 
 Under these assumptions, stochastic effects are identified as follows
 
