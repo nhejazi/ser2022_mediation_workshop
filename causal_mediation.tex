@@ -213,7 +213,7 @@
 \makeatother
 \subtitle{An SER 2022 Workshop}
 \author{\href{https://www.idiaz.xyz/}{Iván Díaz}, \href{https://nimahejazi.org}{Nima Hejazi}, \href{https://kararudolph.github.io/}{Kara Rudolph}}
-\date{updated: May 15, 2022}
+\date{updated: May 16, 2022}
 
 \begin{document}
 \maketitle
@@ -1875,7 +1875,7 @@ There are two possible ways of defining stochastic effects:
   \item
     If \(g_\delta(a \mid w)>0\) then \(g(a \mid w)>0\)
   \item
-    If \(\P(Z=z\mid W=w)>0\) then \(\P(Z=z\mid A=a,W=w)>0\)
+    If \(\P(M=m\mid W=w)>0\) then \(\P(M=m\mid A=a,W=w)>0\)
   \end{itemize}
 \end{itemize}
 
@@ -3081,7 +3081,7 @@ which, we recall, are defined as follows
   \citep{klaassen1987consistent, zheng2011cross, chernozhukov2018double}, which
   exhibit greater robustness than their non-sample-splitting analogs.
 \item
-  To this end, \passthrough{\lstinline!medoutcon!} integrates with the \passthrough{\lstinline!sl3!} \passthrough{\lstinline!R!} package {[}coyle2022sl3{]},
+  To this end, \passthrough{\lstinline!medoutcon!} integrates with the \passthrough{\lstinline!sl3!} \passthrough{\lstinline!R!} package \citep{coyle2022sl3},
   which is extensively documented in this \href{https://tlverse.org/tlverse-handbook/sl3}{book
   chapter} \citep{phillips2022super, vdl2022targeted}.
 \end{itemize}
@@ -3500,13 +3500,13 @@ linear_contrast <- function(params, eifs, ci_level = 0.95) {
 EY <- mean(weight_behavior$bmi)
 eif_EY <- weight_behavior$bmi - EY
 params_de <- list(stoch_decomp_onestep$theta, EY)
-eifs_de <- list(stoch_decomp_onestep$theta, eif_EY)
+eifs_de <- list(stoch_decomp_onestep$eif, eif_EY)
 
 # direct effect = EY - estimated quantity
 de_est <- linear_contrast(params_de, eifs_de)
 de_est
 #>    lwr_ci param_est    upr_ci 
-#> -0.368892 -0.045574  0.277744
+#> -0.509201 -0.045574  0.418053
 \end{lstlisting}
 
 \begin{itemize}

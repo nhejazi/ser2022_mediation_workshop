@@ -94,7 +94,7 @@ which, we recall, are defined as follows
   results in cross-validated (or "cross-fitted") one-step and TML estimators
   [@klaassen1987consistent; @zheng2011cross; @chernozhukov2018double], which
   exhibit greater robustness than their non-sample-splitting analogs.
-* To this end, `medoutcon` integrates with the `sl3` `R` package [coyle2022sl3],
+* To this end, `medoutcon` integrates with the `sl3` `R` package [@coyle2022sl3],
   which is extensively documented in this [book
   chapter](https://tlverse.org/tlverse-handbook/sl3) [@phillips2022super;
   @vdl2022targeted].
@@ -411,13 +411,13 @@ linear_contrast <- function(params, eifs, ci_level = 0.95) {
 EY <- mean(weight_behavior$bmi)
 eif_EY <- weight_behavior$bmi - EY
 params_de <- list(stoch_decomp_onestep$theta, EY)
-eifs_de <- list(stoch_decomp_onestep$theta, eif_EY)
+eifs_de <- list(stoch_decomp_onestep$eif, eif_EY)
 
 # direct effect = EY - estimated quantity
 de_est <- linear_contrast(params_de, eifs_de)
 de_est
 #>    lwr_ci param_est    upr_ci 
-#> -0.368892 -0.045574  0.277744
+#> -0.509201 -0.045574  0.418053
 ```
 * From the above, we can conclude that the effect of increasing the odds of
   participation on a sports team on BMI leads only to a relatively small direct
