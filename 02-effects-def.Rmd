@@ -516,7 +516,7 @@ a relationship between $A$ and $M$, but not between $M$ and $Y$. Then, another
 distinct subgroup of the population has a relationship between $M$ and $Y$ but
 not between $A$ and $M$.  In such a scenario, the interventional indirect effect
 would be nonzero, but there would be no one person in the population whose
-effect of $A on $Y$ would be mediated by $M$.
+effect of $A$ on $Y$ would be mediated by $M$.
 
 <!--
 One counterexample involves creating an NPSEM with independent errors,
