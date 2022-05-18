@@ -213,7 +213,7 @@
 \makeatother
 \subtitle{An SER 2022 Workshop}
 \author{\href{https://www.idiaz.xyz/}{Iván Díaz}, \href{https://nimahejazi.org}{Nima Hejazi}, \href{https://kararudolph.github.io/}{Kara Rudolph}}
-\date{updated: May 16, 2022}
+\date{updated: May 18, 2022}
 
 \begin{document}
 \maketitle
@@ -1652,7 +1652,7 @@ a relationship between \(A\) and \(M\), but not between \(M\) and \(Y\). Then, a
 distinct subgroup of the population has a relationship between \(M\) and \(Y\) but
 not between \(A\) and \(M\). In such a scenario, the interventional indirect effect
 would be nonzero, but there would be no one person in the population whose
-effect of \$A on \(Y\) would be mediated by \(M\).
+effect of \(A\) on \(Y\) would be mediated by \(M\).
 
 More details in the original paper.
 
@@ -1838,7 +1838,7 @@ There are two possible ways of defining stochastic effects:
   Let us introduce the counterfactual \(Y_{A_\delta, M}\), interpreted as the
   outcome observed in a world where the intervention on \(A\) is performed but the
   mediator is fixed at the value it would have taken under no intervention:
-  \[Y_{A_\delta, M}  = f_Y(W, A_\delta, M_{A_\delta}, U_Y)\]
+  \[Y_{A_\delta, M}  = f_Y(W, A_\delta, M, U_Y)\]
 \item
   Then we can decompose the total effect into:
   \begin{align*}
@@ -3081,7 +3081,7 @@ which, we recall, are defined as follows
   \citep{klaassen1987consistent, zheng2011cross, chernozhukov2018double}, which
   exhibit greater robustness than their non-sample-splitting analogs.
 \item
-  To this end, \passthrough{\lstinline!medoutcon!} integrates with the \passthrough{\lstinline!sl3!} \passthrough{\lstinline!R!} package {[}coyle2022sl3{]},
+  To this end, \passthrough{\lstinline!medoutcon!} integrates with the \passthrough{\lstinline!sl3!} \passthrough{\lstinline!R!} package \citep{coyle2022sl3},
   which is extensively documented in this \href{https://tlverse.org/tlverse-handbook/sl3}{book
   chapter} \citep{phillips2022super, vdl2022targeted}.
 \end{itemize}

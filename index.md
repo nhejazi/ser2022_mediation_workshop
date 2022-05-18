@@ -5,7 +5,7 @@ subtitle: "An SER 2022 Workshop"
 author: "[Iván Díaz](https://www.idiaz.xyz/),
   [Nima Hejazi](https://nimahejazi.org),
   [Kara Rudolph](https://kararudolph.github.io/)"
-date: "updated: May 16, 2022"
+date: "updated: May 18, 2022"
 documentclass: book
 site: bookdown::bookdown_site
 bibliography: [book.bib, packages.bib]
