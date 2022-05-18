@@ -30,7 +30,7 @@
 - For example, under identifiability assumptions the natural direct effect is
   equal to
   \begin{equation*}
-    \psi(\P) =  \E[\color{Goldenrod}{\E\{\color{ForestGreen}{\{E(Y \mid A=1, M, W) - \E(Y \mid A=0, M, W)}\mid A=0,W\}}]
+    \psi(\P) =  \E[\color{Goldenrod}{\E\{\color{ForestGreen}{\E(Y \mid A=1, M, W) - \E(Y \mid A=0, M, W)}\mid A=0,W\}}]
   \end{equation*}
 - The notation $\psi(\P)$ implies that the parameter is a function of $\P$
 - This means that we can compute it for any distribution $\P$
