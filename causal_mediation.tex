@@ -1838,7 +1838,7 @@ There are two possible ways of defining stochastic effects:
   Let us introduce the counterfactual \(Y_{A_\delta, M}\), interpreted as the
   outcome observed in a world where the intervention on \(A\) is performed but the
   mediator is fixed at the value it would have taken under no intervention:
-  \[Y_{A_\delta, M}  = f_Y(W, A_\delta, M, U_Y)\]
+  \[Y_{A_\delta, M}  = f_Y(W, A_\delta, M_{A_\delta}, U_Y)\]
 \item
   Then we can decompose the total effect into:
   \begin{align*}
@@ -2227,7 +2227,7 @@ for homeless and nonhomeless individuals?
   For example, under identifiability assumptions the natural direct effect is
   equal to
   \begin{equation*}
-    \psi(\P) =  \E[\color{Goldenrod}{\E\{\color{ForestGreen}{\E(Y \mid A=1, M, W) - \E(Y \mid A=0, M, W)}\mid A=0,W\}}]
+    \psi(\P) =  \E[\color{Goldenrod}{\E\{\color{ForestGreen}{\{E(Y \mid A=1, M, W) - \E(Y \mid A=0, M, W)}\mid A=0,W\}}]
   \end{equation*}
 \item
   The notation \(\psi(\P)\) implies that the parameter is a function of \(\P\)
@@ -2585,6 +2585,11 @@ This SCM is represented in the above DAG and the following causal models:
   Y & = f_Y(W, A, M, U_Y),
 \end{align*}
 where \((U_W, U_A,U_M, U_Y)\) are exogenous random errors.
+
+We assume
+- \(A\) is a single binary randomized treatment (and thus \(A = f_A(U_A)\))
+- \(M\) is a single binary mediator
+- There are no restrictions on the distribution of \(W\) or \(Y\)
 
 Recall that we need to assume the following to identify the above caual effects
 from our observed data:

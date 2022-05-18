@@ -102,7 +102,7 @@ Y_{A_\delta} & = f_Y(W, A_\delta, M_{A_\delta}, U_Y)
 - Let us introduce the counterfactual $Y_{A_\delta, M}$, interpreted as the
   outcome observed in a world where the intervention on $A$ is performed but the
   mediator is fixed at the value it would have taken under no intervention:
-  \[Y_{A_\delta, M}  = f_Y(W, A_\delta, M, U_Y)\]
+  \[Y_{A_\delta, M}  = f_Y(W, A_\delta, M_{A_\delta}, U_Y)\]
 - Then we can decompose the total effect into:
   \begin{align*}
     \E[Y&_{A_\delta,M_{A_\delta}} - Y_{A,M_A}] = \\
