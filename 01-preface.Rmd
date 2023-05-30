@@ -27,19 +27,26 @@ knitr::include_graphics(here::here("img", "ctndag.png"))
 
 ## What is causal mediation analysis?
 
-- Statistical mediation analyses assess associations between the variables
-- Causal mediation analyses assess how the paths behave under circumstances
-  different from the observed circumstances (e.g., interventions)
+- Statistical mediation analyses assess associations between the
+  variables. They can help you establish, for example, if the
+  _association_ between treatment and outcome can be mostly explained
+  by an _association_ between treatment and mediator
+- Causal mediation analyses, on the other hand, seek to asess causal
+  relations. For example, they help you establish whether treatment
+  _causes_ the outcome because it _causes_ the mediator. To do this,
+  causal mediation seek to understand how the
+  paths behave under circumstances different from the observed
+  circumstances (e.g., interventions)
 
 <!--- Causal mediation analysis is thus useful to understand mechanisms-->
 
-### Why are the methods that we will discuss today important?
+### Why are the causal methods that we will discuss today important?
 
 - Assume you are interested in the effect of treatment assignment $A$
   (naltrexone vs.  buprenorphine) on an outcome $Y$ (risk of relapse) through
   mediators $M$ (opioid use, pain, depressive symptoms)
 - We have pre-treatment confounders $W$
-- There is a confounder $Z$ of $M\rightarrow Y$ ffected by treatment assignment
+- There is a confounder $Z$ of $M\rightarrow Y$ affected by treatment assignment
   (adherence)
 - We could fit the following models:
     \begin{align}
@@ -75,6 +82,9 @@ lm_m <- lm(m ~ a + w + z)
 ## product of coefficients
 coef(lm_y)[2] * coef(lm_m)[2]
 ```
+
+- This shows that associational (regression) mediation does not
+  necessarily measure causal mechanisms
 
 Among other things, in this workshop:
 

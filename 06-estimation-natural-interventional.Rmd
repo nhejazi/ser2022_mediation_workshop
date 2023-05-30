@@ -1,6 +1,6 @@
-# Using the EIF to construct an estimator: the case of the natural direct effect
+# Construct a robust semiparametric efficient estimator: the case of the natural direct effect
 
-## Natural direct effect
+## Recap of definition and identification of the natural direct effect
 
 Recall:
 
@@ -109,25 +109,34 @@ Let's take the NDE as an example:
 
 ### The efficient influence function for the NDE
 
-- For illustration, we will first present how to construct an estimator of the
-  NDE that uses the EIF ``by hand''
-- For other parameters, we will teach you how to use our packages _medoutcon_
-  and _medshift_
+<!-- - For illustration, we will first present how to construct an estimator of the -->
+<!--   NDE that uses the EIF ``by hand'' -->
+- Here we show the detaild of how to construct an estimator for the
+  NDE for illustration, but the construction of this estimator is a
+  bit involved and may be complex in daily research practice
+- For practice, we will teach you how to use our packages _medoutcon_
+  and _medshift_ for automatic implementation of these estimators of
+  the NDE and other parameters
 
 First, we need to introduce some notation to describe the EIF for the NDE
 
 - Let $Q(M, W)$ denote $\E(Y\mid A=1, M, W) - \E(Y\mid A=0, M, W)$
-- We can now introduce the EIF:
+- We can now introduce the semiparametric efficient estimator:
 \begin{align*}
-    D(O) &= \color{RoyalBlue}{\bigg\{ \frac{I(A=1)}{\P(A=1\mid W)}\frac{\P(M\mid A=0,W)}{\P(M\mid A=1,W)} -
-      \frac{I(A=0)}{\P(A=0\mid W)}\bigg\}} \times \color{Goldenrod}{[Y-\E(Y\mid A,M,W)]}  \\
-    &+ \color{RoyalBlue}{\frac{I(A=0)}{\P(A=0\mid W)}}\color{Goldenrod}{\big\{Q(M,W) - \E[Q(M,W) | W,A=0] \big\}}\\
-    &+ \color{Goldenrod}{\E[Q(M,W) | W,A=0] - \psi(\P)}
+    \hat\psi &= \frac{1}{n}\sum_{i=1}^n\color{RoyalBlue}{\bigg\{ \frac{I(A_i=1)}{\hat\P(A_i=1\mid W_i)}\frac{\hat\P(M_i\mid A_i=0,W)_i}{\hat\P(M_i\mid A_i=1,W_i)} -
+      \frac{I(A=0)}{\hat\P(A_i=0\mid W_i)}\bigg\}} \color{Goldenrod}{[Y_i-\hat\E(Y\mid A_i,M_i,W_i)]}  \\
+    &+ \frac{1}{n}\sum_{i=1}^n\color{RoyalBlue}{\frac{I(A=0)}{\P(A=0\mid
+	W)}}\color{Goldenrod}{\big\{\hat Q(M_i,W_i) - \hat\E[\hat Q(M_i,W_i) \mid W_i,A_i=0] \big\}}\\
+    &+ \frac{1}{n}\sum_{i=1}^n\color{Goldenrod}{\hat\E[\hat Q(M_i,W_i) | W_i,A_i=0]}
 \end{align*}
 
-- In this EIF, you can recognize elements from the g-computation estimator and the weighted estimator:
-  - $Q(M, W)$ shows up in the g-computation estimator
-  - The weights in blue in the first part of the EIF are used in the weighted estimator
+- In this estimator, you can recognize elements from the g-computation
+  estimator and the weighted estimators:
+  - The third line is the g-computation estimator
+  - The second line is a centered version of the second weighted
+    estimator
+  - The first line is a centered version of the first weighted
+    estimator
 
 - Estimating $\P(M\mid A, W)$ is a really hard problem when $M$ is
   high-dimensional. But, since we have the ratio of these conditional
@@ -139,19 +148,19 @@ First, we need to introduce some notation to describe the EIF for the NDE
   \mid W)}{\P(A = 1 \mid M, W)\P(A=0 \mid W)}.
 \end{equation*}
 
-Thus we can change the expression of the EIF a bit as follows. First, some more
+Thus we can change the expression of the estimator a bit as follows. First, some more
 notation that will be useful later:
 
 - Let $g(a\mid w)$ denote $\P(A=a\mid W=w)$
 - Let $e(a\mid m, w)$ denote $\P(A=a\mid M=m, W=w)$
 - Let $b(a, m, w)$ denote $\E(Y\mid A=a, M=m, W=w)$
-- The EIF is
+- The quantity being averaged can be re-expressed as follows
 
 \begin{align*}
-    D(O) &= \color{RoyalBlue}{\bigg\{ \frac{I(A=1)}{g(0\mid W)}\frac{e(0\mid M,W)}{e(1\mid M,W)} -
+    &= \color{RoyalBlue}{\bigg\{ \frac{I(A=1)}{g(0\mid W)}\frac{e(0\mid M,W)}{e(1\mid M,W)} -
       \frac{I(A=0)}{g(0\mid W)}\bigg\}} \times \color{Goldenrod}{[Y-b(A,M,W)]}  \\
     &+ \color{RoyalBlue}{\frac{I(A=0)}{g(0\mid W)}}\color{Goldenrod}{\big\{Q(M,W) - \E[Q(M,W) | W,A=0] \big\}}\\
-    &+ \color{Goldenrod}{\E[Q(M,W) | W,A=0] - \psi(\P)}
+    &+ \color{Goldenrod}{\E[Q(M,W) | W,A=0]}
 \end{align*}
 
 ### How to compute the one-step estimator (akin to Augmented IPW)
@@ -174,13 +183,7 @@ m <- rbinom(n, 1, mean_m(a, w))
 y <- rnorm(n, mean_y(m, a, w))
 ```
 
-Recall that the one-step estimator is defined as the bias-corrected
-g-computation estimator:
-\begin{equation*}
-  \psi(\hat \P) + \frac{1}{n}\sum_{i=1}^n D(O;\hat \P_i)
-\end{equation*}
-
-Can be computed  in the following steps:
+Recall that the semiarametric efficient estimator can be computed  in the following steps:
 
 1. Fit models for $g(a\mid w)$, $e(a\mid m, w)$, and $b(a, m, w)$
    - In this example we will use Generalized Additive Models for

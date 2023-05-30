@@ -1,4 +1,4 @@
-# Preliminaries on semiparametric estimation
+# G-computation and weighted estimators
 
 ## From causal to statistical quantities
 
@@ -23,7 +23,7 @@
   - The estimation approach we will introduce reduces reliance on these
     statistical assumptions.
 
-### Computing identification formulas if you know the true distribution
+## Computing identification formulas if you know the true distribution
 
 - The mediation parameters that we consider can be
   seen as a function of the joint probability distribution of $O=(W,A,Z,M,Y)$
@@ -44,12 +44,12 @@
   - Compute
   \begin{align*}
     \color{Goldenrod}{\E\{}&\color{ForestGreen}{\E(Y \mid A=1, M, W) - \E(Y \mid A=0, M, W)}\color{Goldenrod}{\mid A=0,W\}} =\\
-    &\color{Goldenrod}{\sum_m\color{ForestGreen}{\{\E(Y \mid A=1, m, w) - \E(Y \mid A=0, m, w)\}}\P(M=m, A=0, W=w)}
+    &\color{Goldenrod}{\sum_m\color{ForestGreen}{\{\E(Y \mid A=1, m, w) - \E(Y \mid A=0, m, w)\}}\P(M=m\mid A=0, W=w)}
   \end{align*}
   - Computing the probability $\P(W=w)$ for all values $w$
   - Computing the mean over all values $w$
 
-### Estimating identification formulas
+### Plug-in (a.k.a g-computation) estimator
 
 The above is how you would compute the _true value_ **if you know** the true
   distribution $\P$
@@ -62,12 +62,12 @@ The above is how you would compute the _true value_ **if you know** the true
   - Estimate $\P(W=w)$ with the empirical distribution
   - Evaluate
     \begin{equation*}
-      \psi(\hat\P) =  \hat\E[\hat\E\{\hat\E(Y \mid A=1, M, W) -
-      \hat\E(Y \mid A=0, M, W)\mid A=0,W\}]
+      \psi(\hat\P) =  \hat\E[\color{RoyalBlue}{\hat\E\{\color{Goldenrod}{\hat\E(Y \mid A=1, M, W) -
+      \hat\E(Y \mid A=0, M, W)}\mid A=0,W\}}]
   \end{equation*}
 - This is known as the g-computation estimator
 
-### Weighted estimator (akin to IPW)
+### First weighted estimator (akin to inverse probability weighted)
 
 - An alternative expresion of the parameter functional (for the NDE) is given by
 
@@ -77,11 +77,22 @@ The above is how you would compute the _true value_ **if you know** the true
 - Thus, you can also construct a weighted estimator as
 
 \[\frac{1}{n}\sum_{i=1}^n\bigg[\color{RoyalBlue}{\bigg\{ \frac{I(A_i=1)}{\hat\P(A_i=1\mid W_i)}\frac{\hat\P(M_i\mid A_i=0,W_i)}{\hat\P(M_i\mid A_i=1,W_i)} -
-      \frac{I(A_i=0)}{\hat\P(A_i=0\mid W_i)}\bigg\}} \times \color{Goldenrod}{Y}\bigg]\]
+      \frac{I(A_i=0)}{\hat\P(A_i=0\mid W_i)}\bigg\}} \times \color{Goldenrod}{Y_i}\bigg]\]
+
+### Second weighted estimator
+
+- The parameter functional for the NDE can also be expressed as a
+  combination of regression and weithing:
+
+\[\E\bigg[\color{RoyalBlue}{\bigg\{\frac{I(A=0)}{\P(A=0\mid W)}\bigg\}} \times \color{Goldenrod}{\E(Y \mid A=1, M, W) - \E(Y \mid A=0, M, W)}\bigg]\]
+
+- Thus, you can also construct a weighted estimator as
+
+\[\frac{1}{n}\sum_{i=1}^n\bigg[\color{RoyalBlue}{\bigg\{\frac{I(A_i=0)}{\hat\P(A_i=0\mid W_i)}\bigg\}} \times \color{Goldenrod}{\hat\E(Y \mid A=1, M_i, W_i) - \hat\E(Y \mid A=0, M_i, W_i)}\bigg]\]
 
 ### How can g-estimation and weighted estimation be implemented in practice?
 
-- There are two possible ways to do g-computation estimation:
+- There are two possible ways to do g-computation or weighted estimation:
   - Using parametric models for the above regressions
   - Using flexible data-adaptive regression (aka machine learning)
 
@@ -196,36 +207,39 @@ text(450, 0.01, paste0(
     fail in some cases
 
 
-## Semiparametric estimation
+### Solution to these problems: robust semiparametric efficient estimation
 
-- Intuitively, it offers a way to use data-adaptive regression to
+- Intuitively, it combines the three above estimators to obtain an
+  estimator with improved robustness properties
+- It offers a way to use data-adaptive regression to
   - avoid model misspecification bias,
-  - endow the estimators with additional robustness (e.g., double robustness),
+  - endow the estimators with additional robustness (e.g., multiple robustness),
     while
-  - allowing the computation of correct standard errors and confidence intervals
-- This can be achieved by adding a bias correction factor the the g-computation
-  as follows:
-  \begin{equation*}
-    \psi(\hat \P) + \frac{1}{n}\sum_{i=1}^n D(O_i)
-  \end{equation*}
-  for some function $D(O_i)$ of the data
-- The function $D(O)$ is called _the efficient influence function_ (EIF)
-- The EIF must be found on a case-by-case basis for each parameter $\psi(\P)$
-- For example, for estimating the standardized mean $\psi(\P)=\E[\E(Y\mid A=1,
-  W)]$, we have
-  \begin{equation*}
-    D(O) = \frac{A}{\hat \P(A=1\mid W)}[Y - \hat\E(Y\mid A=1, W)] +
-    \hat\E(Y\mid A=1, W) - \psi(\hat\P)
-  \end{equation*}
-- The EIF is found by using a distributional analogue of a Taylor expansion
-- In this workshop we will omit the specific form of $D(O)$ for
-  some of the parameters that we use
-- But the estimators we discuss and implement in the R packages will be based on
-  these EIFs
-- And the specific form of the EIF may be found in papers in the references
+  - allowing the computation of correct standard errors and confidence
+  intervals using Gaussian approximations
+<!-- - This can be achieved by adding a bias correction factor the the g-computation -->
+<!--   as follows: -->
+<!--   \begin{equation*} -->
+<!--     \psi(\hat \P) + \frac{1}{n}\sum_{i=1}^n D(O_i) -->
+<!--   \end{equation*} -->
+<!--   for some function $D(O_i)$ of the data -->
+<!-- - The function $D(O)$ is called _the efficient influence function_ (EIF) -->
+<!-- - The EIF must be found on a case-by-case basis for each parameter $\psi(\P)$ -->
+<!-- - For example, for estimating the standardized mean $\psi(\P)=\E[\E(Y\mid A=1, -->
+<!--   W)]$, we have -->
+<!--   \begin{equation*} -->
+<!--     D(O) = \frac{A}{\hat \P(A=1\mid W)}[Y - \hat\E(Y\mid A=1, W)] + -->
+<!--     \hat\E(Y\mid A=1, W) - \psi(\hat\P) -->
+<!--   \end{equation*} -->
+<!-- - The EIF is found by using a distributional analogue of a Taylor expansion -->
+<!-- - In this workshop we will omit the specific form of $D(O)$ for -->
+<!--   some of the parameters that we use -->
+<!-- - But the estimators we discuss and implement in the R packages will be based on -->
+<!--   these EIFs -->
+<!-- - And the specific form of the EIF may be found in papers in the references -->
 
-Note: the bias correction above may have an additional problem of
-returning parameter estimates outside of natural bounds. E.g.,
-probabilities greater than one. A solution to this (not discussed in
-this workshop but implemented in some of the R packages) is targeted
-minimum loss based estimation.
+<!-- Note: the bias correction above may have an additional problem of -->
+<!-- returning parameter estimates outside of natural bounds. E.g., -->
+<!-- probabilities greater than one. A solution to this (not discussed in -->
+<!-- this workshop but implemented in some of the R packages) is targeted -->
+<!-- minimum loss based estimation. -->
