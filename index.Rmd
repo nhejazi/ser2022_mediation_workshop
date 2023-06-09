@@ -84,17 +84,16 @@ __NOTE: All times listed in Pacific Time.__
 
 ### [Iván Díaz](https://www.idiaz.xyz/) {-}
 
-I am an Associate Professor of Biostatistics in the [Department of
-Population Health at New York University Grossman School of
-Medicine](https://med.nyu.edu/faculty/ivan-l-diaz).  My research
-focuses on the development of non-parametric statistical methods for
-causal inference from observational and randomized studies with
-complex datasets, using machine learning. This includes but is not
-limited to mediation analysis, methods for continuous exposures,
-longitudinal data including survival analysis, and efficiency
-guarantees with covariate adjustment in randomized trials. I am also
-interested in general semi-parametric theory, machine learning, and
-high-dimensional data.
+I am an Assistant Professor of Biostatistics in the [Department of Population
+Health Sciences at Weill Cornell
+Medicine](https://phs.weill.cornell.edu/research-collaboration/our-divisions/biostatistics).
+My research focuses on the development of non-parametric statistical methods for
+causal inference from observational and randomized studies with complex
+datasets, using machine learning. This includes but is not limited to mediation
+analysis, methods for continuous exposures, longitudinal data including survival
+analysis, and efficiency guarantees with covariate adjustment in randomized
+trials. I am also interested in general semi-parametric theory, machine
+learning, and high-dimensional data.
 
 ### [Nima Hejazi](https://nimahejazi.org) {-}
 
